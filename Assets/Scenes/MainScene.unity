@@ -441,6 +441,7 @@ GameObject:
   - component: {fileID: 289312526}
   - component: {fileID: 289312525}
   - component: {fileID: 289312524}
+  - component: {fileID: 289312528}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -534,6 +535,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &289312528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289312523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d5ebf667f916a479d6abdc23d6a1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JugA: {fileID: 1314218146}
+  JugB: {fileID: 1052433139}
+  Target: {fileID: 1290942057}
+  BigBottle: {fileID: 436164186}
+  SmallBottle: {fileID: 1506336931}
+  menu: {fileID: 289312523}
+  error_message: {fileID: 1961870193}
 --- !u!1 &339007824
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +721,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6707883ede3858046ac6758f2c79c928, type: 3}
+--- !u!1 &436164186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 149131504176364202, guid: 6707883ede3858046ac6758f2c79c928,
+    type: 3}
+  m_PrefabInstance: {fileID: 436164185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &662082865
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,13 +894,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.47569516, y: -0.071923494, z: -0.5480938, w: 0.68420345}
-  m_LocalPosition: {x: 1.75, y: 1.98, z: -1.02}
+  m_LocalRotation: {x: 0.68898404, y: -0.26324174, z: -0.48609006, w: 0.4687443}
+  m_LocalPosition: {x: 1.33, y: 1.23, z: 0.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 34.897, y: -49.093, z: -93.732}
+  m_LocalEulerAnglesHint: {x: 22.954, y: -95.483, z: -117.274}
 --- !u!1 &745051170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,6 +1808,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6eefb7b3568eef4db0efcb5fa0507e6, type: 3}
+--- !u!1 &1506336931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1991420744688600882, guid: b6eefb7b3568eef4db0efcb5fa0507e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1506336930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1738770382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1895,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1738770385}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 289312528}
+        m_MethodName: BS_Start
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1738770385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1970,7 +2013,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: JugA and JugB cannot have the same values
+  m_Text: 
 --- !u!222 &1961870194
 CanvasRenderer:
   m_ObjectHideFlags: 0
