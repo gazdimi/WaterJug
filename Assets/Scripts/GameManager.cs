@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 int larger = Math.Max(jug_A, jug_B);
                 menu.SetActive(false);
                 Breadth_First_Search.State solution = Breadth_First_Search.Search(SmallBottle, BigBottle, smaller, larger, target);
-                //Breadth_First_Search.PrintSolution(solution);
+                Breadth_First_Search.PrintSolution(solution);
             }
         }
         catch (ArgumentException)
