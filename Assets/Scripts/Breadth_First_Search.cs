@@ -2,13 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Breadth_First_Search : MonoBehaviour
 {
+    public GameObject retry_canvas;
+
     private static GameObject SmallBottle;
     private static GameObject BigBottle;
 
-    public static State Search(GameObject _smallBottle, GameObject _bigBottle, int capacity_1, int capacity_2, int target)
+    private static List<Tuple<string, string>> movement = new List<Tuple<string, string>>();                                //current_volume_1, current_volume_2
+    private int retry = 0;
+    private static int frames = 0;
+
+    void Update()
+    {
+        frames++;
+        if (frames % 20 == 0)
+        {
+            if (movement.Count != 0)
+            {
+                string current_volume_1 = movement[0].Item1;
+                string current_volume_2 = movement[0].Item2;
+
+                SmallBottle.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = current_volume_1;
+                BigBottle.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = current_volume_2;
+
+                //todo  BigBottle.transform.GetChild(1).localScale (change scaling)
+                retry++;
+                movement.RemoveAt(0);
+            }
+            else if (movement.Count == 0 && retry != 0)
+            { //solution done
+                movement.Clear();
+                retry_canvas.SetActive(true);
+            }
+            frames = 0;
+        }
+    }
+
+    public static State Search(GameObject _smallBottle, GameObject _bigBottle, int capacity_1, int capacity_2, int target) //capacity_1 --> smaller, capacity_2 --> larger
     {
         SmallBottle = _smallBottle;
         BigBottle = _bigBottle;
@@ -98,9 +131,9 @@ public class Breadth_First_Search : MonoBehaviour
             parent = parent.parent;
         }
         Debug.Log("Jug 1 current volume of capacity " + solution.parent.capacity_1 + " | Jug 2 current volume of capacity " + solution.parent.capacity_2);
-        Debug.Log("__________________________________________________________________________\n");
         for (int i = 0; i < path.Count; i++) {
             State state = path[path.Count - i - 1];
+            movement.Add(new Tuple<string, string>(state.current_volume_1.ToString(), state.current_volume_2.ToString()));
             Debug.Log(string.Concat(System.Linq.Enumerable.Repeat("     ", 4)) + state.current_volume_1 + string.Concat(System.Linq.Enumerable.Repeat("     ", 2)) + "   |   " + string.Concat(System.Linq.Enumerable.Repeat("     ", 3)) + state.current_volume_2);
             Debug.Log("----------------------------------------------------------------------");
         }
