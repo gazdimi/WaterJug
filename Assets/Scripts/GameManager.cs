@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject SmallBottle;
 
     public GameObject menu;
+    public GameObject info;
     public Text error_message;
 
     //gets called before application starts
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
                 int smaller = Math.Min(jug_A, jug_B);
                 int larger = Math.Max(jug_A, jug_B);
                 menu.SetActive(false);
-                Breadth_First_Search.State solution = Breadth_First_Search.Search(SmallBottle, BigBottle, smaller, larger, target);
+                Breadth_First_Search.State solution = Breadth_First_Search.Search(SmallBottle, BigBottle, smaller, larger, target, info);
                 Breadth_First_Search.PrintSolution(solution);
             }
         }

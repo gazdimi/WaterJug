@@ -8,32 +8,36 @@ public class Breadth_First_Search : MonoBehaviour
 {
     public GameObject retry_canvas;
 
+    private static GameObject info;
     private static GameObject SmallBottle;
     private static GameObject BigBottle;
 
     private static List<Tuple<string, string>> movement = new List<Tuple<string, string>>();                                //current_volume_1, current_volume_2
     private int retry = 0;
     private static int frames = 0;
+    private static int state = 1;
 
     void Update()
     {
         frames++;
-        if (frames % 20 == 0)
+        if (frames % 60 == 0)
         {
             if (movement.Count != 0)
             {
+                info.transform.GetChild(2).GetComponent<Text>().text = "State: " + state.ToString();
+
                 string current_volume_1 = movement[0].Item1;
                 string current_volume_2 = movement[0].Item2;
 
                 SmallBottle.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = current_volume_1;
                 BigBottle.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = current_volume_2;
-
-                //todo  BigBottle.transform.GetChild(1).localScale (change scaling)
                 retry++;
+                state++;
                 movement.RemoveAt(0);
             }
             else if (movement.Count == 0 && retry != 0)
             { //solution done
+                state = 0;
                 movement.Clear();
                 retry_canvas.SetActive(true);
             }
@@ -41,17 +45,15 @@ public class Breadth_First_Search : MonoBehaviour
         }
     }
 
-    public static State Search(GameObject _smallBottle, GameObject _bigBottle, int capacity_1, int capacity_2, int target) //capacity_1 --> smaller, capacity_2 --> larger
+    public static State Search(GameObject _smallBottle, GameObject _bigBottle, int capacity_1, int capacity_2, int target, GameObject _info) //capacity_1 --> smaller, capacity_2 --> larger
     {
         SmallBottle = _smallBottle;
         BigBottle = _bigBottle;
+        info = _info;
 
         SmallBottle.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = capacity_1.ToString();
         BigBottle.transform.Find("Canvas").Find("TotalCapacity").GetComponent<Text>().text = capacity_2.ToString();
-
-        /*SmallBottle.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = "8"; //testing
-        Debug.Log("SMALLER -->" + smaller); //testing
-        Debug.Log("LARGER -->" + larger); //testing*/
+        info.transform.GetChild(1).GetComponent<Text>().text = "Target: " + target.ToString();
 
         State initial_state = new State();
         initial_state.capacity_1 = capacity_1;
