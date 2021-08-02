@@ -13,7 +13,7 @@ public class Breadth_First_Search : MonoBehaviour
     private static GameObject BigBottle;
 
     private static List<Tuple<string, string>> movement = new List<Tuple<string, string>>();                                //current_volume_1, current_volume_2
-    private int retry = 0;
+    private static int retry = 0;
     private static int frames = 0;
     private static int state = 1;
 
@@ -38,8 +38,11 @@ public class Breadth_First_Search : MonoBehaviour
             else if (movement.Count == 0 && retry != 0)
             { //solution done
                 state = 0;
+				retry = 0;
                 movement.Clear();
-                retry_canvas.SetActive(true);
+				if(state==0 && movement.Count==0 && retry==0){
+					retry_canvas.SetActive(true);
+				}
             }
             frames = 0;
         }
